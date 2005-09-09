@@ -1,0 +1,218 @@
+\usemodule[readme]
+
+\setupinteraction
+  [title=ruby-lisp README,
+   author=Nikolai Weibull]
+
+\useURL [RDoc]      [http://rdoc.sourceforge.net/]
+\useURL [Download]  [http://rubyforge.org/project/showfiles.php?group_id=109]
+\useURL [Website]   [http://ned.rubyforge.org/ruby-lisp/]
+
+\defineplacement[center][left=\hfill,right=\hfill]
+
+\starttext
+
+\startbodymatter
+
+
+\title{Ruby-lisp ReadMe}
+
+\section{Introduction}
+
+“So what’s ruby-lisp?”, you ask.  Well, it’s a module for implementing nice
+Lisp features for use in Ruby.  Currently the only sub||module that exists is
+\type{Lisp::Format}, which implements Lisp’s \type{(format)} function and its
+formatting language.  For people not familiar with this language, it’s a very
+expressive string formatting language, much like \type{sprintf()}’s, but much
+more powerful.  It allows for iteration, case conversion, conditionals, and
+much more.  If you’ve ever felt stupid while creating a string iteratively, to
+print an array or some such, this is definitely for you!
+
+
+\section{Authors}
+
+Ruby-lisp was written by the following people:
+
+\startitemize
+  \item Nikolai Weibull $<$nikolai@bitwi.se$>$
+\stopitemize
+
+
+\section{Documentation}
+
+There is extensive documentation available, both of the implementation and how
+to use the formatting language and its constructs, embedded in the source using
+RDoc.  To generate the documentation, simply run RDoc on \FileName{format.rb}:
+
+\startshellsession
+$ rdoc format.rb
+\stopshellsession
+
+RDoc can be found at \from[RDoc].
+
+
+\section{Download}
+
+The current release can be found at \from[Download].
+
+
+\section{News}
+
+\subsection{Version 0.3.0: Adding a \FileName{NEWS} file.}
+
+\startitemize
+  \item Added NEWS file, as it was forgotten in previous release.
+\stopitemize
+
+\subsection{Version 0.2.0: Adding project||related files and a setup method.}
+
+\startitemize
+  \item Added a lot of project files, such as AUTHORS, ChangeLog, and so on.
+  
+  \item Added setup.rb script so that installation was made a bit more accessible.
+\stopitemize
+
+\subsection{Version 0.1.0: Initial release.}
+
+Nothing to report; initial release.
+
+
+\section{Install}
+
+Ruby-lisp uses Minero Aoki’s \FileName{setup.rb} script to perform
+installation.  What follows is an adapted introduction of how it works.
+
+
+\subsection{How to set things up quickly.}
+
+
+The following set of commands should be enough to install ruby-lisp for most
+users.
+
+\startshellsession
+$ ruby setup.rb config
+$ ruby setup.rb setup
+# ruby setup.rb install
+\stopshellsession
+
+Lines beginning with a hash (\type{#}) may require root permissions.
+
+
+\subsection{More of the details.}
+
+Usage of setup.rb is:
+
+\startshellsession
+$ ruby setup.rb <global options>
+$ ruby setup.rb [<global options>] <task> [<task options>]
+\stopshellsession
+
+Here, \type{<global options>} are any of the following:
+
+
+  \placecenter
+    \starttable[|l|l|]
+    \NC \bf Option                  \NC \bf Meaning                         \NC\AR
+    \HL
+    \NC \type{-q}, \type{--quiet}   \NC Suppress message outputs            \NC\AR
+    \NC \type{--verbose}            \NC Output messages verbosely (default) \NC\AR
+    \NC \type{-h}, \type{--help}    \NC Prints help and quit                \NC\AR
+    \NC \type{-v}, \type{--version} \NC Prints version and quit             \NC\AR
+    \NC \type{--copyright}          \NC Prints copyright and quit           \NC\AR
+    \stoptable
+
+A task can be one of the following:
+
+  \placecenter
+    \starttable[|l|l|]
+    \NC \bf Task                    \NC \bf Meaning                         \NC\AR
+    \HL
+    \NC \type{config}               \NC Checks and saves configurations     \NC\AR
+    \NC \type{show}                 \NC Prints current configurations       \NC\AR
+    \NC \type{setup}                \NC Compiles ruby extentions            \NC\AR
+    \NC \type{install}              \NC Installs files                      \NC\AR
+    \NC \type{clean}                \NC Cleans created files                \NC\AR
+    \NC \type{distclean}            \NC Cleans created files (thouroughly)  \NC\AR
+    \stoptable
+
+The \type{config} task takes the following options:
+
+  \placecenter
+    \starttabulate[|l|lp|]
+    \NC \bf Option                      \NC \bf Meaning                                                             \NC\AR
+    \HL
+    \NC \type{--prefix=PATH}            \NC A prefix of the installing directory path                               \NC\AR
+    \NC \type{--std-ruby=PATH}          \NC The directory for standard ruby libraries                               \NC\AR
+    \NC \type{--site-ruby-common=PATH}  \NC The directory for version-independent non-standard ruby libraries       \NC\AR
+    \NC \type{--site-ruby=PATH}         \NC The directory for non-standard ruby libraries                           \NC\AR
+    \NC \type{--bin-dir=PATH}           \NC The directory for commands                                              \NC\AR
+    \NC \type{--rb-dir=PATH}            \NC The directory for ruby scripts                                          \NC\AR
+    \NC \type{--so-dir=PATH}            \NC The directory for ruby extentions                                       \NC\AR
+    \NC \type{--data-dir=PATH}          \NC The directory for shared data                                           \NC\AR
+    \NC \type{--ruby-path=PATH}         \NC Path to set to she||bang line                                           \NC\AR
+    \NC \type{--ruby-prog=PATH}         \NC The ruby program using for installation                                 \NC\AR
+    \NC \type{--make-prog=NAME}         \NC The make program to compile ruby extentions                             \NC\AR
+    \NC \type{--without-ext}            \NC Forces to \FileName{setup.rb} never to compile/install ruby extentions  \NC\AR
+    \NC \type{--rbconfig=PATH}          \NC Your \FileName{rbconfig.rb} to load                                     \NC\AR
+    \stoptabulate
+
+You can view the default values of these options by typing:
+
+\startshellsession
+$ ruby setup.rb --help
+\stopshellsession
+
+If there’s the directory named \type{packages}, You can also use these options:
+
+  \placecenter
+    \starttable[|l|l|]
+    \NC \bf Option                            \NC \bf Meaning                             \NC\AR
+    \HL
+    \NC \type{--with=NAME,NAME,NAME,}\dots    \NC Packages that you want to install       \NC\AR
+    \NC \type{--without=NAME,NAME,NAME,}\dots \NC Packages that you don’t want to install \NC\AR
+    \stoptable
+
+You can pass options for extconf.rb like this:
+
+\startshellsession
+$ ruby setup.rb config -- \
+> --with-tklib=/usr/lib/libtk-ja.so.8.0
+\stopshellsession
+
+The \type{install} task takes the following options:
+
+  \placecenter
+    \starttable[|l|l|]
+    \NC \bf Option            \NC \bf Meaning                                 \NC\AR
+    \HL
+    \NC \type{--no-harm}      \NC Prints what to do and done nothing really   \NC\AR
+    \NC \type{--prefix=PATH}  \NC The prefix of the installing directory path \NC\AR
+    \stoptable
+
+
+\section{Copying}
+
+This library is free software; you can redistribute it and|/|or modify it under
+the terms of the \GNU\ Lesser General Public License as published by the Free
+Software Foundation; either version 2.1 of the license, or (at your option) any
+later version.
+
+This library is distributed in the hope that it will be useful, but
+{\em without any warranty}; without even the implied warranty of
+{\em merchantability} or {\em fitness for a particular purpose}.  See the \GNU\
+Lesser General Public License for more details.
+
+The \GNU\ Lesser General Public License can be found at \from[LGPL].  It can
+also be requested by writing to the Free Software Foundation.  I bare no
+responsibility for {\em you} finding this license, as all it does is grant
+{\em you} rights that {\em you} wouldn’t have without it.
+
+
+\section{Project Web||site}
+
+The project website for ruby-lisp is currently located at \from[Website].
+
+
+\stopbodymatter
+
+\stoptext
