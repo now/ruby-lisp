@@ -5,12 +5,15 @@
 
 
 require 'forwardable'
+require 'injector'
 
 require 'lisp/format/io/columntrackingoutput'
-require 'lisp/format/error'
 
 class Lisp::Format::State
   extend Forwardable
+  extend Injector
+
+  needs 'lisp/format/error'
 
   def initialize(args, output)
     @args, @output = Arguments.new(args), output
@@ -100,7 +103,7 @@ private
     end
 
     def error(format, *args)
-      Lisp::Format::Error.new(-1, format, *args)
+      Error.new(-1, format, *args)
     end
 
     private :error

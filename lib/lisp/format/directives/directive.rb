@@ -3,12 +3,16 @@
 # Copyright © 2005 Nikolai Weibull <nikolai@bitwi.se>
 
 require 'forwardable'
+require 'injector'
 
 require 'lisp/format/parameters'
 require 'lisp/format/modifiers'
 
 class Lisp::Format::Directives::Directive
   extend Forwardable
+  extend Injector
+
+  needs 'lisp/format/error'
 
   add_attr_accessor :params, :modifiers, :symbol
 
@@ -40,14 +44,6 @@ protected
   def_delegators :@modifiers, :colon?, :at?, :both?
 
 private
-
-  def error(format, *args)
-    Lisp::Format::Error.new(@pos, format, *args)
-  end
-
-  def perror(param, format, *args)
-    Lisp::Format::Error.new(@params[param].pos, format, *args)
-  end
 
   def params=(params)
     myparams = self.class.params
@@ -92,5 +88,13 @@ private
   def delegate_to_d(w, state)
     state.args.unget
     delegate(?D, w >= 0 ? [w] : [], NoMods, state)
+  end
+
+  def error(format, *args)
+    Error.new(@pos, format, *args)
+  end
+
+  def perror(param, format, *args)
+    Error.new(@params[param].pos, format, *args)
   end
 end

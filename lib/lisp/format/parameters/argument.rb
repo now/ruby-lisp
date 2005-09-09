@@ -2,7 +2,6 @@
 #
 # Copyright © 2005 Nikolai Weibull <nikolai@bitwi.se>
 
-require 'lisp/format/error'
 require 'lisp/format/parameters/default'
 
 class Lisp::Format::Parameters::Argument < Lisp::Format::Parameters::Default
@@ -24,8 +23,8 @@ class Lisp::Format::Parameters::Argument < Lisp::Format::Parameters::Default
     elsif @value.nil?
       arg
     else
-      raise error('argument doesn’t respond to :to_~:[str~;int~]',
-                  @value.respond_to?(:to_int))
+      raise Error.new(@pos, 'argument doesn’t respond to :to_~:[str~;int~]',
+                      @value.respond_to?(:to_int))
     end
   end
 end

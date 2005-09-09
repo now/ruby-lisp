@@ -19,14 +19,12 @@ class Lisp::Format::Directives::Layout::JustificationOrBlock < Lisp::Format::Dir
         @is_block = directive.colon?
         if @special_separator
           if @is_block and @special_separator.colon?
-            raise Lisp::Format::Error.new(@special_separator.pos, '‘@’ ~
-                                          modifier not allowed for ~~; within ~
-                                          a justification (~~<…~~>)')
+            raise Error.new(@special_separator.pos, '‘@’ modifier not allowed ~
+                            for ~~; within a justification (~~<…~~>)')
           end
           if not @is_block and @special_separator.at?
-            raise Lisp::Format::Error.new(@special_separator.pos, '‘:’ ~
-                                          modifier not allowed for ~~; within ~
-                                          a logical block (~~<…~~:>)')
+            raise Error.new(@special_separator.pos, '‘:’ modifier not allowed ~
+                            for ~~; within a logical block (~~<…~~:>)')
           end
         end
         break

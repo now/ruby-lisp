@@ -7,7 +7,6 @@
 module Lisp
   module Format
     require 'lisp/format/evilmodifications'
-    require 'lisp/format/error'
     require 'lisp/format/scanner'
     require 'lisp/format/state'
   end

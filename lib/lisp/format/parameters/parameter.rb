@@ -2,7 +2,13 @@
 #
 # Copyright © 2005 Nikolai Weibull <nikolai@bitwi.se>
 
+require 'injector'
+
 class Lisp::Format::Parameters::Parameter
+  extend Injector
+
+  needs 'lisp/format/error'
+
   @@parsers = []
 
   def initialize(pos, value = nil)

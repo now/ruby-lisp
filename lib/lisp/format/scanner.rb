@@ -6,14 +6,17 @@
 
 require 'stringio'
 require 'forwardable'
+require 'injector'
 
 require 'lisp/format/directives'
-require 'lisp/format/error'
 require 'lisp/format/parameters'
 require 'lisp/format/modifiers'
 
 class Lisp::Format::Scanner
   extend Forwardable
+  extend Injector
+
+  needs 'lisp/format/error'
 
   DirectiveChar = ?~
 
@@ -28,8 +31,7 @@ class Lisp::Format::Scanner
   def with(directive)
     @stack.push directive
     while d = scan: yield d end
-    raise Lisp::Format::Error.new(directive.pos,
-                                  'no corresponding end bracket found') unless d
+    raise Error.new(directive.pos, 'no corresponding end bracket found') unless d
   ensure
     @stack.pop
   end
@@ -115,6 +117,6 @@ private
   end
 
   def error(format, *args)
-    Lisp::Format::Error.new(@format.pos, format, *args)
+    Error.new(@format.pos, format, *args)
   end
 end
