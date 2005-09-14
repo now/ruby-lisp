@@ -2,8 +2,6 @@
 #
 # Copyright © 2005 Nikolai Weibull <nikolai@bitwi.se>
 
-
-
 require 'stringio'
 require 'forwardable'
 require 'injector'

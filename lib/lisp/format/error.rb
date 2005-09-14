@@ -2,8 +2,9 @@
 #
 # Copyright © 2005 Nikolai Weibull <nikolai@bitwi.se>
 
+class Lisp::Format::Error < StandardError
+  UnspecifiedPosition = -1
 
-class Lisp::Format::Error < ArgumentError
   def initialize(pos, message, *args)
     super message
     @pos, @args = pos, args
