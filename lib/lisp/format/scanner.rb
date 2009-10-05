@@ -95,13 +95,14 @@ private
   end
 
   def parse_modifiers
-    ms = none = Lisp::Format::Modifiers[false, false]
-    until @format.eof
-      break unless m = Lisp::Format::Modifiers.parse(@format)
-      raise error('duplicate modifier ‘~C’', c) if ms & m != none
-      ms |= m
+    returning Lisp::Format::Modifiers[false, false] do |ms|
+      none = ms
+      until @format.eof?
+        break unless m = Lisp::Format::Modifiers.parse(@format)
+        raise error('duplicate modifier ‘~C’', c) if ms & m != none
+        ms |= m
+      end
     end
-    ms
   end
 
   def parse_directive

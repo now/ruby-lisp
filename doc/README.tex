@@ -1,0 +1,99 @@
+\usemodule[readme]
+
+\setupinteraction
+  [title=ruby-lisp README,
+   author=Nikolai Weibull]
+
+\useURL [RDoc]      [http://rdoc.sourceforge.net/]
+\useURL [Download]  [http://rubyforge.org/project/showfiles.php?group_id=109]
+\useURL [Website]   [http://ned.rubyforge.org/ruby-lisp/]
+
+\defineplacement[center][left=\hfill,right=\hfill]
+
+\starttext
+
+\startbodymatter
+
+
+\title{Ruby-lisp ReadMe}
+
+\section{Introduction}
+
+“So what’s ruby-lisp?”, you ask.  Well, it’s a module for implementing nice
+Lisp features for use in Ruby.  Currently the only sub||module that exists is
+\type{Lisp::Format}, which implements Lisp’s \type{(format)} function and its
+formatting language.  For people not familiar with this language, it’s a very
+expressive string formatting language, much like \type{sprintf()}’s, but much
+more powerful.  It allows for iteration, case conversion, conditionals, and
+much more.  If you’ve ever felt stupid while creating a string iteratively, to
+print an array or some such, this is definitely for you!
+
+
+\section{Authors}
+
+Ruby-lisp was written by the following people:
+
+\startitemize
+  \item Nikolai Weibull $<$nikolai@bitwi.se$>$
+\stopitemize
+
+
+\section{Documentation}
+
+There is extensive documentation available, both of the implementation and how
+to use the formatting language and its constructs, embedded in the source using
+RDoc.  To generate the documentation, simply run RDoc on \FileName{format.rb}:
+
+\startshellsession
+$ rdoc format.rb
+\stopshellsession
+
+RDoc can be found at \from[RDoc].
+
+
+\section{Download}
+
+The current release can be found at \from[Download].
+
+
+\section{News}
+
+\subsection{Version 0.3.0: Adding a \FileName{NEWS} file.}
+
+\startitemize
+  \item Added NEWS file, as it was forgotten in previous release.
+\stopitemize
+
+\subsection{Version 0.2.0: Adding project||related files and a setup method.}
+
+\startitemize
+  \item Added a lot of project files, such as AUTHORS, ChangeLog, and so on.
+  
+  \item Added setup.rb script so that installation was made a bit more accessible.
+\stopitemize
+
+\subsection{Version 0.1.0: Initial release.}
+
+Nothing to report; initial release.
+
+
+\section{Install}
+
+Ruby-lisp uses Minero Aoki’s \FileName{setup.rb} script to perform
+installation.  What follows is an adapted introduction of how it works.
+
+\getbuffer[INSTALL-setup.rb]
+
+
+\section{Copying}
+
+\getbuffer[COPYING-LGPL]
+
+\section{Project Web||site}
+
+The project website for ruby-lisp is currently located at \from[Website].
+
+
+\stopbodymatter
+
+\stoptext
